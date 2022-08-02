@@ -14,27 +14,12 @@ type Controller struct {
 }
 
 type Params struct {
-	Page  *int `query:"page"  json:"page,omitempty"  validate:"gte=1" default:"1"  example:"1"`
-	Limit *int `query:"limit" json:"limit,omitempty" validate:"gte=1" default:"10" example:"10"`
+	Page  int `query:"page"  json:"page,omitempty"  validate:"gte=1" default:"1"  example:"1"`
+	Limit int `query:"limit" json:"limit,omitempty" validate:"gte=1" default:"10" example:"10"`
 }
 
 type Body struct {
 	Title string `json:"title"`
-}
-
-func (p Params) Pagination() (page, limit int) {
-	if p.Limit == nil {
-		limit = 10
-	} else {
-		limit = *p.Limit
-	}
-
-	if p.Page == nil {
-		page = 0
-	} else {
-		page = limit * (*p.Page - 1)
-	}
-	return page, limit
 }
 
 func NewController(service service.Service) *Controller {
@@ -68,7 +53,7 @@ func (c Controller) GetAll(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	page, limit := param.Pagination()
+	page, limit := param.Page, param.Limit
 	items, err := c.FindAll(page, limit)
 
 	if err != nil {

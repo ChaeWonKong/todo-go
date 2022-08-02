@@ -2,17 +2,16 @@ package service_test
 
 import (
 	"context"
-	"fmt"
+	"log"
 	"os"
 	"testing"
-	mocks "todo-clone/mocks/repository"
 	config "todo-clone/modules/confing"
 	"todo-clone/modules/delivery/rest/service"
 	"todo-clone/modules/domains"
+	"todo-clone/modules/repository"
 
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxtest"
-	"gorm.io/gorm"
 )
 
 // type ServiceTestSuite struct {
@@ -51,11 +50,11 @@ var TestModule = fx.Options(
 	config.Modules,
 	fx.Provide(service.NewService),
 	fx.Invoke(registerHook),
-	// fx.Invoke(func(repo *repository.Repository) {
-	// 	if err := repo.AutoMigrate(&domains.Item{}); err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// }),
+	fx.Invoke(func(repo *repository.Repository) {
+		if err := repo.AutoMigrate(&domains.Item{}); err != nil {
+			log.Fatal(err)
+		}
+	}),
 )
 
 // func (suite *ServiceTestSuite) TestFindOne() {
@@ -67,17 +66,6 @@ var TestModule = fx.Options(
 
 func TestFindOne(t *testing.T) {
 	f := func() {
-		mockRepository := mocks.Repository{}
-		item := &domains.Item{}
-		mockRepository.On("First", item, uint64(1)).Return(gorm.DB{})
-
-		s := service.NewService(&mockRepository)
-
-		found, err := s.FindOne(1)
-
-		fmt.Println(found)
-		fmt.Println(err)
-		// assert.NoError(t, err)
 
 	}
 

@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  database:
+    container_name: todolist
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./mysql/.env

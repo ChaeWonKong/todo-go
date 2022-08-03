@@ -12,6 +12,7 @@ type Repository interface {
 	Delete(value interface{}, conds ...interface{}) (tx *gorm.DB)
 	Find(dest interface{}, conds ...interface{}) (tx *gorm.DB)
 	AutoMigrate(dst ...interface{}) error
+	Model(value interface{}) (tx *gorm.DB)
 }
 
 type RepositoryImpl struct {

@@ -22,6 +22,7 @@ func BindRoutes(e *echo.Echo, handler *Handler) {
 	e.GET("/:id", handler.FindOne)
 	e.POST("", handler.Create)
 	e.PATCH("/:id", handler.Update)
+	e.DELETE("/:id", handler.Delete)
 }
 
 func (handler *Handler) FindOne(c echo.Context) error {
@@ -95,4 +96,24 @@ func (handler *Handler) Update(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, item)
+}
+
+func (handler *Handler) Delete(c echo.Context) error {
+	ID := c.Param("id")
+	id, err := strconv.Atoi(ID)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	item := &domains.Item{}
+
+	tx := handler.repo.Delete(&item, uint64(id))
+	if tx.Error != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+	}
+	if tx.RowsAffected == 0 {
+		return c.JSON(http.StatusNotFound, nil)
+	}
+
+	return c.JSON(http.StatusNoContent, nil)
 }

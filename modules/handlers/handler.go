@@ -9,6 +9,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+type UpdateDto struct {
+	Title   string `json:"title"`
+	Checked *bool  `json:"checked"`
+}
+
 type Handler struct {
 	repo repositories.Repository
 }
@@ -72,10 +77,6 @@ func (handler *Handler) Create(c echo.Context) error {
 	return c.JSON(http.StatusCreated, item)
 }
 
-type UpdateDto struct {
-	Title string `json:"title"`
-}
-
 func (handler *Handler) Update(c echo.Context) error {
 	ID := c.Param("id")
 	id, err := strconv.Atoi(ID)
@@ -84,11 +85,25 @@ func (handler *Handler) Update(c echo.Context) error {
 	}
 
 	body := &UpdateDto{}
+	item := &domains.Item{}
 	if err := c.Bind(body); err != nil {
-
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	item := &domains.Item{}
+	// TODO: use switch
+	if len(body.Title) != 0 && body.Checked != nil {
+		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Updates(map[string]interface{}{"title": body.Title, "checked": body.Checked}).Error
+	}
+
+	if len(body.Title) != 0 {
+		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
+	}
+
+	if body.Checked != nil {
+		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("checked", body.Checked).Error
+	}
+
+	// item := &domains.Item{}
 	err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
 
 	if err != nil {

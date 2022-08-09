@@ -94,24 +94,20 @@ func (handler *Handler) Update(c echo.Context) error {
 		return err
 	}
 
-	if len(body.Title) != 0 && body.Checked != nil {
-		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Updates(map[string]interface{}{"title": body.Title, "checked": body.Checked}).Error
-	}
-
-	if len(body.Title) != 0 && body.Checked == nil {
-		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
-	}
-
-	if len(body.Title) == 0 && body.Checked != nil {
-		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("checked", body.Checked).Error
-	}
-
 	if len(body.Title) == 0 && body.Checked == nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "At least title or checked should be provided")
 	}
 
-	// item := &domains.Item{}
-	// err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
+	updateDto := make(map[string]interface{}, 2)
+
+	if len(body.Title) != 0 {
+		updateDto["Title"] = body.Title
+	}
+	if body.Checked != nil {
+		updateDto["Checked"] = body.Checked
+	}
+
+	err = handler.repo.Model(item).Where("id = ?", uint64(id)).Updates(updateDto).Error
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())

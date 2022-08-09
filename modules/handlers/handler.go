@@ -10,8 +10,8 @@ import (
 )
 
 type UpdateDto struct {
-	Title   string `json:"title"`
-	Checked *bool  `json:"checked"`
+	Title   string `json:"title" validate:"omitempty"`
+	Checked *bool  `json:"checked" validate:"omitempty"`
 }
 
 type Handler struct {
@@ -90,21 +90,28 @@ func (handler *Handler) Update(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	// TODO: use switch
+	if err = c.Validate(body); err != nil {
+		return err
+	}
+
 	if len(body.Title) != 0 && body.Checked != nil {
 		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Updates(map[string]interface{}{"title": body.Title, "checked": body.Checked}).Error
 	}
 
-	if len(body.Title) != 0 {
+	if len(body.Title) != 0 && body.Checked == nil {
 		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
 	}
 
-	if body.Checked != nil {
+	if len(body.Title) == 0 && body.Checked != nil {
 		err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("checked", body.Checked).Error
 	}
 
+	if len(body.Title) == 0 && body.Checked == nil {
+		return echo.NewHTTPError(http.StatusBadRequest, "At least title or checked should be provided")
+	}
+
 	// item := &domains.Item{}
-	err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
+	// err = handler.repo.Model(item).Where("id = ?", uint64(id)).Update("title", body.Title).Error
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())

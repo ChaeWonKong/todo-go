@@ -9,11 +9,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type UpdateDto struct {
-	Title   string `json:"title" validate:"omitempty"`
-	Checked *bool  `json:"checked" validate:"omitempty"`
-}
-
 type Handler struct {
 	repo repositories.Repository
 }
@@ -61,6 +56,10 @@ func (handler *Handler) Create(c echo.Context) error {
 
 	if err := c.Bind(item); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	if err := c.Validate(item); err != nil {
+		return err
 	}
 
 	tx := handler.repo.Create(item)

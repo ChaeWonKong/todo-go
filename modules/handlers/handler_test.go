@@ -1,43 +1,41 @@
 package handlers_test
 
-// func fixtures() (h *handlers.Handler, m *mocks.Repository) {
-// 	m = &mocks.Repository{}
-// 	h = handlers.NewHandler(m) // TODO: hand over instance not pointer
+import (
+	"net/http"
+	"net/http/httptest"
+	"testing"
+	mocks "todo-go/mocks/repositories"
+	"todo-go/modules/domains"
+	"todo-go/modules/handlers"
 
-// 	return h, m
-// }
+	"github.com/labstack/echo/v4"
+	"github.com/stretchr/testify/assert"
+)
 
-// func TestFindOne(t *testing.T) {
-// 	h, m := fixtures()
-// 	e := echo.New()
+func fixtures() (h *handlers.Handler, m *mocks.Repository) {
+	m = &mocks.Repository{}
+	h = handlers.NewHandler(m) // TODO: hand over instance not pointer
 
-// 	req := httptest.NewRequest(http.MethodGet, "/", nil)
-// 	rec := httptest.NewRecorder()
+	return h, m
+}
 
-// 	c := e.NewContext(req, rec)
-// 	c.SetParamNames("id")
-// 	c.SetParamValues("1")
+func TestFindOne(t *testing.T) {
+	responseJSON := `{"id":0,"title":"title1","checked":false,"created":"0001-01-01T00:00:00Z","updated":"0001-01-01T00:00:00Z"}`
 
-// 	item := domains.Item{}
-// 	m.On("First", &item, uint64(1)).Return(&gorm.DB{Error: nil})
-// 	assert.NoError(t, h.FindOne(c))
-// }
+	h, m := fixtures()
+	e := echo.New()
 
-// // assert.NoError(t, err)
-// // if assert.NoError(t, h.FindOne(c)) {
-// // Test Blocks
-// // item, err := service.Fetch(1)
-// // assert.Error(t, err)
-// // assert.Nil(t, item)
-// // affected, err := service.Insert(&todo.Item{Title: "test"})
-// // assert.NoError(t, err)
-// // assert.NotZero(t, affected)
-// // item, err = service.Fetch(1)
-// // assert.NoError(t, err)
-// // assert.NotNil(t, item)
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	rec := httptest.NewRecorder()
 
-// // fmt.Println(rec.Body.String())
-// // assert.NotNil(t, rec.Body)
-// // assert.Equal(t, mockItemJson, rec.Body.String())
-// // }
-// // }
+	c := e.NewContext(req, rec)
+	c.SetParamNames("id")
+	c.SetParamValues("1")
+
+	item := domains.Item{Title: "title1"}
+	m.On("FindOne", uint64(1)).Return(item, nil)
+	if assert.NoError(t, h.FindOne(c)) {
+		assert.Equal(t, http.StatusOK, rec.Code)
+		assert.JSONEq(t, responseJSON, rec.Body.String())
+	}
+}

@@ -26,7 +26,6 @@ func BindRoutes(e *echo.Echo, handler *Handler) {
 }
 
 func (handler *Handler) FindOne(c echo.Context) error {
-	item := *&domains.Item{}
 	ID := c.Param("id")
 
 	id, err := strconv.Atoi(ID)
@@ -34,7 +33,9 @@ func (handler *Handler) FindOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	if err = handler.repo.First(&item, uint64(id)).Error; err != nil {
+	item, err := handler.repo.FindOne(uint64(id))
+
+	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
@@ -42,8 +43,7 @@ func (handler *Handler) FindOne(c echo.Context) error {
 }
 
 func (handler *Handler) FindAll(c echo.Context) error {
-	items := make([]domains.Item, 10)
-	err := handler.repo.Find(&items).Error
+	items, err := handler.repo.FindAll()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
@@ -62,8 +62,7 @@ func (handler *Handler) Create(c echo.Context) error {
 		return err
 	}
 
-	tx := handler.repo.Create(item)
-	affected, err := tx.RowsAffected, tx.Error
+	affected, err := handler.repo.CreateOne(item)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
@@ -84,7 +83,6 @@ func (handler *Handler) Update(c echo.Context) error {
 	}
 
 	body := &UpdateDto{}
-	item := &domains.Item{}
 	if err := c.Bind(body); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -106,13 +104,13 @@ func (handler *Handler) Update(c echo.Context) error {
 		updateDto["Checked"] = body.Checked
 	}
 
-	err = handler.repo.Model(item).Where("id = ?", uint64(id)).Updates(updateDto).Error
+	affected, err := handler.repo.UpdateOne(uint64(id), updateDto)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, item)
+	return c.JSON(http.StatusOK, affected)
 }
 
 func (handler *Handler) Delete(c echo.Context) error {
@@ -122,13 +120,11 @@ func (handler *Handler) Delete(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	item := &domains.Item{}
-
-	tx := handler.repo.Delete(&item, uint64(id))
-	if tx.Error != nil {
+	affected, err := handler.repo.DeleteOne(uint64(id))
+	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	if tx.RowsAffected == 0 {
+	if affected == 0 {
 		return c.JSON(http.StatusNotFound, nil)
 	}
 

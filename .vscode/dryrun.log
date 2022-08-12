@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/chaewonkong/dev/personal-projects/todo-go'
+/bin/sh -c 'echo "\n\033[1;32;40m[테스트를 시작합니다.]\033[0m "'
+mockery --dir modules --all --case underscore --keeptree
+make: Leaving directory '/home/chaewonkong/dev/personal-projects/todo-go'
+ 

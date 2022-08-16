@@ -1,6 +1,7 @@
 package handlers_test
 
 import (
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -31,29 +32,35 @@ func TestFindOne(t *testing.T) {
 
 	id := 1
 	item := domains.Item{Title: "title1", ID: uint64(id)}
-	idMatcher := func(id uint64) bool {
-		return id == item.ID
-	}
 
-	matchedBy := mock.MatchedBy(idMatcher)
-	m.On("FindOne", matchedBy).Return(item, nil)
+	m.On("FindOne", mock.Anything).Return(func(id uint64) interface{} {
+		if id == item.ID {
+			return item
+		}
+		return nil
+	}, func(id uint64) error {
+		if id == item.ID {
+			return nil
+		}
+		return errors.New("ID not found")
+	})
 
 	// Test
-	t.Run("Correct id as param", func(t *testing.T) {
+	t.Run("Correct id provided", func(t *testing.T) {
 		responseJSON := `{"id":1,"title":"title1","checked":false,"created":"0001-01-01T00:00:00Z","updated":"0001-01-01T00:00:00Z"}`
 		c.SetParamValues(strconv.Itoa(id))
 		if assert.NoError(t, h.FindOne(c)) {
 			assert.Equal(t, http.StatusOK, rec.Code)
 			assert.JSONEq(t, responseJSON, rec.Body.String())
 		}
-		m.AssertCalled(t, "FindOne", matchedBy)
 	})
-	t.Run("Incorrect id as param", func(t *testing.T) {
+	t.Run("Not numeric id provided", func(t *testing.T) {
 		c.SetParamValues("x")
-		assert.Panics(t, func() {
-			c.SetParamValues("2")
-			assert.Error(t, h.FindOne(c))
-			m.AssertCalled(t, "FindOne", matchedBy)
-		})
+		assert.Error(t, h.FindOne(c))
+	})
+
+	t.Run("Non-existing id provided", func(t *testing.T) {
+		c.SetParamValues("-1")
+		assert.Error(t, h.FindOne(c))
 	})
 }

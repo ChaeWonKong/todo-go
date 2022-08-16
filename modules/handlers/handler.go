@@ -36,7 +36,7 @@ func (handler *Handler) FindOne(c echo.Context) error {
 	item, err := handler.repo.FindOne(uint64(id))
 
 	if err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, item)

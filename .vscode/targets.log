@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Aug 12 16:52:19 2022
+# Make data base, printed on Tue Aug 16 16:46:56 2022
 
 # Variables
 
@@ -33,7 +33,7 @@ CURDIR := /home/chaewonkong/dev/personal-projects/todo-go
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"cbe5aafd932102a66266fc5a1fc1d63c.ko","_translationsConfigFile":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko/tcf.json","_cacheRoot":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko","_resolvedLanguagePackCoreLocation":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko/da76f93349a72022ca4670c1b84860304616aaa2","_corruptedFile":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"cbe5aafd932102a66266fc5a1fc1d63c.ko","_translationsConfigFile":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko/tcf.json","_cacheRoot":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko","_resolvedLanguagePackCoreLocation":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko/6d9b74a70ca9c7733b29f0456fd8195364076dda","_corruptedFile":"/home/chaewonkong/.vscode-server/data/clp/cbe5aafd932102a66266fc5a1fc1d63c.ko/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /mnt/c/Users/chaewonkong/AppData/Local/Programs/Microsoft VS Code/bin/code
 # environment
@@ -53,15 +53,17 @@ GOPROXY = https://proxy.golang.org,direct
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/chaewonkong/.gvm/gos/go1.18/bin:/home/chaewonkong/.vscode-server/bin/da76f93349a72022ca4670c1b84860304616aaa2/bin/remote-cli:/home/chaewonkong/.gvm/pkgsets/go1.18/global/bin:/home/chaewonkong/.gvm/pkgsets/go1.18/global/overlay/bin:/home/chaewonkong/.gvm/bin:/home/chaewonkong/.gvm/bin:/home/chaewonkong/anaconda/bin:/home/chaewonkong/anaconda3/bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/Go/bin:/mnt/c/Program Files (x86)/Pulse Secure/VC142.CRT/X64/:/mnt/c/Program Files (x86)/Pulse Secure/VC142.CRT/X86/:/mnt/c/Program Files (x86)/Common Files/Pulse Secure/TNC Client Plugin/:/mnt/c/Users/chaewonkong/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/chaewonkong/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/chaewonkong/go/bin:/mnt/c/Users/chaewonkong/AppData/Local/Programs/Hyper/resources/bin:/usr/local/go/bin
+PATH = /home/chaewonkong/.gvm/gos/go1.18/bin:/home/chaewonkong/.vscode-server/bin/6d9b74a70ca9c7733b29f0456fd8195364076dda/bin/remote-cli:/home/chaewonkong/.gvm/pkgsets/go1.18/global/bin:/home/chaewonkong/.gvm/pkgsets/go1.18/global/overlay/bin:/home/chaewonkong/.gvm/bin:/home/chaewonkong/.gvm/bin:/home/chaewonkong/anaconda/bin:/home/chaewonkong/anaconda3/bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/Go/bin:/mnt/c/Program Files (x86)/Pulse Secure/VC142.CRT/X64/:/mnt/c/Program Files (x86)/Pulse Secure/VC142.CRT/X86/:/mnt/c/Program Files (x86)/Common Files/Pulse Secure/TNC Client Plugin/:/mnt/c/Users/chaewonkong/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/chaewonkong/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/chaewonkong/go/bin:/mnt/c/Users/chaewonkong/AppData/Local/Programs/Hyper/resources/bin:/usr/local/go/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 GOPATH = /home/chaewonkong/.gvm/pkgsets/go1.18/global
+# makefile (from 'makefile', line 4)
+PKG_LIST := todo-go todo-go/mocks/repositories todo-go/modules/domains todo-go/modules/handlers todo-go/modules/repositories
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-7789562c-1182-4611-925b-5d4cb1b93a6f.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-123579a0-127b-462c-992c-5ac870a2995d.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -73,13 +75,13 @@ PWD = /home/chaewonkong/dev/personal-projects/todo-go
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/10_interop
+WSL_INTEROP = /run/WSL/15_interop
 # environment
 PKG_CONFIG_PATH = /home/chaewonkong/.gvm/pkgsets/go1.18/global/overlay/lib/pkgconfig:
 # makefile (from 'makefile', line 1)
 GREEN = \n\033[1;32;40m
 # environment
-WT_SESSION = 7d3ecdab-9561-4eb2-818b-5970dbb7bf05
+WT_SESSION = c34686ff-fbbb-4f19-b0c1-e1b7df4e4401
 # environment
 GOMODCACHE = /home/chaewonkong/.gvm/pkgsets/go1.18/global/pkg/mod
 # environment
@@ -150,6 +152,8 @@ MFLAGS = -pqrR
 VSCODE_HANDLES_SIGPIPE = true
 # environment
 WT_PROFILE_ID = {51855cb2-8cce-5362-8f54-464b92b32386}
+# 'override' directive
+.SHELLSTATUS := 0
 # default
 MAKEFILES := 
 # automatic
@@ -177,7 +181,7 @@ DYLD_LIBRARY_PATH = /home/chaewonkong/.gvm/pkgsets/go1.18/global/overlay/lib:
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=82/1024=8%, Rehash=0, Collisions=7/107=7%
+# Load=84/1024=8%, Rehash=0, Collisions=7/112=6%
 
 # Pattern-specific Variable Values
 
@@ -185,9 +189,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 214793): 13 files, no impossibilities.
+# . (device 2064, inode 214793): 15 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -202,7 +206,7 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
-.PHONY: mocks
+.PHONY: mocks coverage
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -210,7 +214,7 @@ all:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-12 11:33:21.815354325
+#  Last modified 2022-08-12 17:28:12.225423569
 #  File has been updated.
 #  Successfully updated.
 
@@ -220,29 +224,41 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+coverage:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 12):
+	@/bin/sh -c 'echo "${GREEN}[test coverage를 계산합니다.]${NC}"'
+	@mkdir -p .public/coverage
+	@gocov test ${PKG_LIST} | gocov-html > .public/coverage/index.html
+	@gocov test ${PKG_LIST} | gocov-xml > coverage.xml
+	@gocov test ${PKG_LIST} | gocov report
+
 mocks:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 5):
+#  recipe to execute (from 'makefile', line 7):
 	@/bin/sh -c 'echo "${GREEN}[테스트를 시작합니다.]${NC}"'
 	@mockery --dir modules --all --case underscore --keeptree
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/20=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 158 B / avg = 8 B
-# current buf: size = 8162 B / used = 158 B / count = 19 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 188 B / avg = 8 B
+# current buf: size = 8162 B / used = 188 B / count = 22 / avg = 8 B
 
-# strcache performance: lookups = 27 / hit rate = 29%
+# strcache performance: lookups = 34 / hit rate = 35%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=1/27=4%
-# Finished Make data base on Fri Aug 12 16:52:19 2022
+# Load=22/8192=0%, Rehash=0, Collisions=1/34=3%
+# Finished Make data base on Tue Aug 16 16:46:56 2022
 
  

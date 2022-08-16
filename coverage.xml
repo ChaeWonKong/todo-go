@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.15254237" branch-rate="0" lines-covered="9" lines-valid="59" branches-covered="0" branches-valid="0" complexity="0" version="" timestamp="1660642127283">
+	<packages>
+		<package name="todo-go/modules/handlers" line-rate="0.15254237" branch-rate="0" complexity="0" line-count="59" line-hits="9">
+			<classes>
+				<class name="-" filename="modules/handlers/handler.go" line-rate="0.16666667" branch-rate="0" complexity="0" line-count="6" line-hits="1">
+					<methods>
+						<method name="NewHandler" signature="" line-rate="1" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="17" hits="1"></line>
+							</lines>
+						</method>
+						<method name="BindRoutes" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="21" hits="0"></line>
+								<line number="22" hits="0"></line>
+								<line number="23" hits="0"></line>
+								<line number="24" hits="0"></line>
+								<line number="25" hits="0"></line>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="17" hits="1"></line>
+						<line number="21" hits="0"></line>
+						<line number="22" hits="0"></line>
+						<line number="23" hits="0"></line>
+						<line number="24" hits="0"></line>
+						<line number="25" hits="0"></line>
+					</lines>
+				</class>
+				<class name="Handler" filename="modules/handlers/handler.go" line-rate="0.1509434" branch-rate="0" complexity="0" line-count="53" line-hits="8">
+					<methods>
+						<method name="FindOne" signature="" line-rate="1" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="29" hits="1"></line>
+								<line number="31" hits="1"></line>
+								<line number="32" hits="1"></line>
+								<line number="33" hits="1"></line>
+								<line number="36" hits="1"></line>
+								<line number="38" hits="1"></line>
+								<line number="39" hits="1"></line>
+								<line number="42" hits="1"></line>
+							</lines>
+						</method>
+						<method name="FindAll" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="46" hits="0"></line>
+								<line number="47" hits="0"></line>
+								<line number="48" hits="0"></line>
+								<line number="51" hits="0"></line>
+							</lines>
+						</method>
+						<method name="Create" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="55" hits="0"></line>
+								<line number="57" hits="0"></line>
+								<line number="58" hits="0"></line>
+								<line number="61" hits="0"></line>
+								<line number="62" hits="0"></line>
+								<line number="65" hits="0"></line>
+								<line number="67" hits="0"></line>
+								<line number="68" hits="0"></line>
+								<line number="71" hits="0"></line>
+								<line number="72" hits="0"></line>
+								<line number="75" hits="0"></line>
+							</lines>
+						</method>
+						<method name="Update" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="79" hits="0"></line>
+								<line number="80" hits="0"></line>
+								<line number="81" hits="0"></line>
+								<line number="82" hits="0"></line>
+								<line number="85" hits="0"></line>
+								<line number="86" hits="0"></line>
+								<line number="87" hits="0"></line>
+								<line number="90" hits="0"></line>
+								<line number="91" hits="0"></line>
+								<line number="94" hits="0"></line>
+								<line number="95" hits="0"></line>
+								<line number="98" hits="0"></line>
+								<line number="100" hits="0"></line>
+								<line number="101" hits="0"></line>
+								<line number="103" hits="0"></line>
+								<line number="104" hits="0"></line>
+								<line number="107" hits="0"></line>
+								<line number="109" hits="0"></line>
+								<line number="110" hits="0"></line>
+								<line number="113" hits="0"></line>
+							</lines>
+						</method>
+						<method name="Delete" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+							<lines>
+								<line number="117" hits="0"></line>
+								<line number="118" hits="0"></line>
+								<line number="119" hits="0"></line>
+								<line number="120" hits="0"></line>
+								<line number="123" hits="0"></line>
+								<line number="124" hits="0"></line>
+								<line number="125" hits="0"></line>
+								<line number="127" hits="0"></line>
+								<line number="128" hits="0"></line>
+								<line number="131" hits="0"></line>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="29" hits="1"></line>
+						<line number="31" hits="1"></line>
+						<line number="32" hits="1"></line>
+						<line number="33" hits="1"></line>
+						<line number="36" hits="1"></line>
+						<line number="38" hits="1"></line>
+						<line number="39" hits="1"></line>
+						<line number="42" hits="1"></line>
+						<line number="46" hits="0"></line>
+						<line number="47" hits="0"></line>
+						<line number="48" hits="0"></line>
+						<line number="51" hits="0"></line>
+						<line number="55" hits="0"></line>
+						<line number="57" hits="0"></line>
+						<line number="58" hits="0"></line>
+						<line number="61" hits="0"></line>
+						<line number="62" hits="0"></line>
+						<line number="65" hits="0"></line>
+						<line number="67" hits="0"></line>
+						<line number="68" hits="0"></line>
+						<line number="71" hits="0"></line>
+						<line number="72" hits="0"></line>
+						<line number="75" hits="0"></line>
+						<line number="79" hits="0"></line>
+						<line number="80" hits="0"></line>
+						<line number="81" hits="0"></line>
+						<line number="82" hits="0"></line>
+						<line number="85" hits="0"></line>
+						<line number="86" hits="0"></line>
+						<line number="87" hits="0"></line>
+						<line number="90" hits="0"></line>
+						<line number="91" hits="0"></line>
+						<line number="94" hits="0"></line>
+						<line number="95" hits="0"></line>
+						<line number="98" hits="0"></line>
+						<line number="100" hits="0"></line>
+						<line number="101" hits="0"></line>
+						<line number="103" hits="0"></line>
+						<line number="104" hits="0"></line>
+						<line number="107" hits="0"></line>
+						<line number="109" hits="0"></line>
+						<line number="110" hits="0"></line>
+						<line number="113" hits="0"></line>
+						<line number="117" hits="0"></line>
+						<line number="118" hits="0"></line>
+						<line number="119" hits="0"></line>
+						<line number="120" hits="0"></line>
+						<line number="123" hits="0"></line>
+						<line number="124" hits="0"></line>
+						<line number="125" hits="0"></line>
+						<line number="127" hits="0"></line>
+						<line number="128" hits="0"></line>
+						<line number="131" hits="0"></line>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+	<sources>
+		<source>/home/chaewonkong/dev/personal-projects/todo-go</source>
+	</sources>
+</coverage>

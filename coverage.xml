@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.15254237" branch-rate="0" lines-covered="9" lines-valid="59" branches-covered="0" branches-valid="0" complexity="0" version="" timestamp="1660642127283">
+<coverage line-rate="0.22033899" branch-rate="0" lines-covered="13" lines-valid="59" branches-covered="0" branches-valid="0" complexity="0" version="" timestamp="1660644551893">
 	<packages>
-		<package name="todo-go/modules/handlers" line-rate="0.15254237" branch-rate="0" complexity="0" line-count="59" line-hits="9">
+		<package name="todo-go/modules/handlers" line-rate="0.22033899" branch-rate="0" complexity="0" line-count="59" line-hits="13">
 			<classes>
 				<class name="-" filename="modules/handlers/handler.go" line-rate="0.16666667" branch-rate="0" complexity="0" line-count="6" line-hits="1">
 					<methods>
@@ -30,7 +30,7 @@
 						<line number="25" hits="0"></line>
 					</lines>
 				</class>
-				<class name="Handler" filename="modules/handlers/handler.go" line-rate="0.1509434" branch-rate="0" complexity="0" line-count="53" line-hits="8">
+				<class name="Handler" filename="modules/handlers/handler.go" line-rate="0.2264151" branch-rate="0" complexity="0" line-count="53" line-hits="12">
 					<methods>
 						<method name="FindOne" signature="" line-rate="1" branch-rate="0" complexity="0" line-count="0" line-hits="0">
 							<lines>
@@ -44,12 +44,12 @@
 								<line number="42" hits="1"></line>
 							</lines>
 						</method>
-						<method name="FindAll" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
+						<method name="FindAll" signature="" line-rate="1" branch-rate="0" complexity="0" line-count="0" line-hits="0">
 							<lines>
-								<line number="46" hits="0"></line>
-								<line number="47" hits="0"></line>
-								<line number="48" hits="0"></line>
-								<line number="51" hits="0"></line>
+								<line number="46" hits="1"></line>
+								<line number="47" hits="1"></line>
+								<line number="48" hits="1"></line>
+								<line number="51" hits="1"></line>
 							</lines>
 						</method>
 						<method name="Create" signature="" line-rate="0" branch-rate="0" complexity="0" line-count="0" line-hits="0">
@@ -115,10 +115,10 @@
 						<line number="38" hits="1"></line>
 						<line number="39" hits="1"></line>
 						<line number="42" hits="1"></line>
-						<line number="46" hits="0"></line>
-						<line number="47" hits="0"></line>
-						<line number="48" hits="0"></line>
-						<line number="51" hits="0"></line>
+						<line number="46" hits="1"></line>
+						<line number="47" hits="1"></line>
+						<line number="48" hits="1"></line>
+						<line number="51" hits="1"></line>
 						<line number="55" hits="0"></line>
 						<line number="57" hits="0"></line>
 						<line number="58" hits="0"></line>

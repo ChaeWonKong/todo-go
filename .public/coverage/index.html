@@ -132,20 +132,23 @@
     </head>
     <body>
         <div id="doctitle">Coverage Report</div>
-    <div id="about">Generated on 16 Aug 22 18:28 +0900 with <a href="https://github.com/matm/gocov-html">gocov-html</a></div><div id="pkg_todo-go/modules/handlers" class="funcname">Package Overview: todo-go/modules/handlers <span class="packageTotal">15.25%</span></div><p>This is a coverage report created after analysis of the <code>todo-go/modules/handlers</code> package. It 
+    <div id="about">Generated on 16 Aug 22 19:09 +0900 with <a href="https://github.com/matm/gocov-html">gocov-html</a></div><div id="pkg_todo-go/modules/handlers" class="funcname">Package Overview: todo-go/modules/handlers <span class="packageTotal">22.03%</span></div><p>This is a coverage report created after analysis of the <code>todo-go/modules/handlers</code> package. It 
         has been generated with the following command:</p><pre class="cmd">gocov test todo-go/modules/handlers | gocov-html</pre>        <p>Here are the stats. Please select a function name to view its implementation and see what's left for testing.</p><table class="overview">
 <tr id="s_fn_Handler.FindOne"><td><code><a href="#fn_Handler.FindOne">Handler.FindOne(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>100.00%</code></td><td class="linecount"><code>8/8</code></td></tr>
+<tr id="s_fn_Handler.FindAll"><td><code><a href="#fn_Handler.FindAll">Handler.FindAll(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>100.00%</code></td><td class="linecount"><code>4/4</code></td></tr>
 <tr id="s_fn_NewHandler"><td><code><a href="#fn_NewHandler">NewHandler(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>100.00%</code></td><td class="linecount"><code>1/1</code></td></tr>
 <tr id="s_fn_Handler.Update"><td><code><a href="#fn_Handler.Update">Handler.Update(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>0.00%</code></td><td class="linecount"><code>0/20</code></td></tr>
 <tr id="s_fn_Handler.Create"><td><code><a href="#fn_Handler.Create">Handler.Create(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>0.00%</code></td><td class="linecount"><code>0/11</code></td></tr>
 <tr id="s_fn_Handler.Delete"><td><code><a href="#fn_Handler.Delete">Handler.Delete(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>0.00%</code></td><td class="linecount"><code>0/10</code></td></tr>
 <tr id="s_fn_BindRoutes"><td><code><a href="#fn_BindRoutes">BindRoutes(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>0.00%</code></td><td class="linecount"><code>0/5</code></td></tr>
-<tr id="s_fn_Handler.FindAll"><td><code><a href="#fn_Handler.FindAll">Handler.FindAll(...)</a></code></td><td><code>todo-go/modules/handlers/handler.go</code></td><td class="percent"><code>0.00%</code></td><td class="linecount"><code>0/4</code></td></tr>
-<tr><td colspan="2"><code>todo-go/modules/handlers</code></td><td class="percent"><code>15.25%</code></td><td class="linecount"><code>9/59</code></td></tr>
+<tr><td colspan="2"><code>todo-go/modules/handlers</code></td><td class="percent"><code>22.03%</code></td><td class="linecount"><code>13/59</code></td></tr>
 </table>
 
 <div class="funcname" id="fn_Handler.FindOne">func Handler.FindOne</div><div class="info"><a href="#s_fn_Handler.FindOne">Back</a><p>In <code>/home/chaewonkong/dev/personal-projects/todo-go/modules/handlers/handler.go</code>:</p></div><table class="listing">
 <tr><td>28</td><td><code><pre>func (handler *Handler) FindOne(c echo.Context) error {</pre></code></td></tr><tr><td>29</td><td><code><pre>        ID := c.Param(&#34;id&#34;)</pre></code></td></tr><tr><td>30</td><td><code><pre></pre></code></td></tr><tr><td>31</td><td><code><pre>        id, err := strconv.Atoi(ID)</pre></code></td></tr><tr><td>32</td><td><code><pre>        if err != nil {</pre></code></td></tr><tr><td>33</td><td><code><pre>                return echo.NewHTTPError(http.StatusBadRequest, err.Error())</pre></code></td></tr><tr><td>34</td><td><code><pre>        }</pre></code></td></tr><tr><td>35</td><td><code><pre></pre></code></td></tr><tr><td>36</td><td><code><pre>        item, err := handler.repo.FindOne(uint64(id))</pre></code></td></tr><tr><td>37</td><td><code><pre></pre></code></td></tr><tr><td>38</td><td><code><pre>        if err != nil {</pre></code></td></tr><tr><td>39</td><td><code><pre>                return echo.NewHTTPError(http.StatusNotFound, err.Error())</pre></code></td></tr><tr><td>40</td><td><code><pre>        }</pre></code></td></tr><tr><td>41</td><td><code><pre></pre></code></td></tr><tr><td>42</td><td><code><pre>        return c.JSON(http.StatusOK, item)</pre></code></td></tr><tr><td>43</td><td><code><pre>}</pre></code></td></tr></table>
+
+<div class="funcname" id="fn_Handler.FindAll">func Handler.FindAll</div><div class="info"><a href="#s_fn_Handler.FindAll">Back</a><p>In <code>/home/chaewonkong/dev/personal-projects/todo-go/modules/handlers/handler.go</code>:</p></div><table class="listing">
+<tr><td>45</td><td><code><pre>func (handler *Handler) FindAll(c echo.Context) error {</pre></code></td></tr><tr><td>46</td><td><code><pre>        items, err := handler.repo.FindAll()</pre></code></td></tr><tr><td>47</td><td><code><pre>        if err != nil {</pre></code></td></tr><tr><td>48</td><td><code><pre>                return echo.NewHTTPError(http.StatusNotFound, err.Error())</pre></code></td></tr><tr><td>49</td><td><code><pre>        }</pre></code></td></tr><tr><td>50</td><td><code><pre></pre></code></td></tr><tr><td>51</td><td><code><pre>        return c.JSON(http.StatusOK, items)</pre></code></td></tr><tr><td>52</td><td><code><pre>}</pre></code></td></tr></table>
 
 <div class="funcname" id="fn_NewHandler">func NewHandler</div><div class="info"><a href="#s_fn_NewHandler">Back</a><p>In <code>/home/chaewonkong/dev/personal-projects/todo-go/modules/handlers/handler.go</code>:</p></div><table class="listing">
 <tr><td>16</td><td><code><pre>func NewHandler(repo repositories.Repository) *Handler {</pre></code></td></tr><tr><td>17</td><td><code><pre>        return &amp;Handler{repo}</pre></code></td></tr><tr><td>18</td><td><code><pre>}</pre></code></td></tr></table>
@@ -162,14 +165,11 @@
 <div class="funcname" id="fn_BindRoutes">func BindRoutes</div><div class="info"><a href="#s_fn_BindRoutes">Back</a><p>In <code>/home/chaewonkong/dev/personal-projects/todo-go/modules/handlers/handler.go</code>:</p></div><table class="listing">
 <tr><td>20</td><td><code><pre>func BindRoutes(e *echo.Echo, handler *Handler) {</pre></code></td></tr><tr class="miss"><td>21</td><td><code><pre>        e.GET(&#34;&#34;, handler.FindAll)</pre></code></td></tr><tr class="miss"><td>22</td><td><code><pre>        e.GET(&#34;/:id&#34;, handler.FindOne)</pre></code></td></tr><tr class="miss"><td>23</td><td><code><pre>        e.POST(&#34;&#34;, handler.Create)</pre></code></td></tr><tr class="miss"><td>24</td><td><code><pre>        e.PATCH(&#34;/:id&#34;, handler.Update)</pre></code></td></tr><tr class="miss"><td>25</td><td><code><pre>        e.DELETE(&#34;/:id&#34;, handler.Delete)</pre></code></td></tr><tr><td>26</td><td><code><pre>}</pre></code></td></tr></table>
 
-<div class="funcname" id="fn_Handler.FindAll">func Handler.FindAll</div><div class="info"><a href="#s_fn_Handler.FindAll">Back</a><p>In <code>/home/chaewonkong/dev/personal-projects/todo-go/modules/handlers/handler.go</code>:</p></div><table class="listing">
-<tr><td>45</td><td><code><pre>func (handler *Handler) FindAll(c echo.Context) error {</pre></code></td></tr><tr class="miss"><td>46</td><td><code><pre>        items, err := handler.repo.FindAll()</pre></code></td></tr><tr class="miss"><td>47</td><td><code><pre>        if err != nil {</pre></code></td></tr><tr class="miss"><td>48</td><td><code><pre>                return echo.NewHTTPError(http.StatusNotFound, err.Error())</pre></code></td></tr><tr><td>49</td><td><code><pre>        }</pre></code></td></tr><tr><td>50</td><td><code><pre></pre></code></td></tr><tr class="miss"><td>51</td><td><code><pre>        return c.JSON(http.StatusOK, items)</pre></code></td></tr><tr><td>52</td><td><code><pre>}</pre></code></td></tr></table>
-
 <!-- Can be parsed by external script
-PACKAGE:todo-go/modules/handlers DONE:15.25
+PACKAGE:todo-go/modules/handlers DONE:22.03
 -->
 
 <div id="summaryWrapper"><div class="package">todo-go/modules/handlers</div>
-<div id="totalcov">15.25%</div>
+<div id="totalcov">22.03%</div>
 </div>
     </body>

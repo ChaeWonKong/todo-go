@@ -67,3 +67,26 @@ func TestFindOne(t *testing.T) {
 		assert.Error(t, h.FindOne(c))
 	})
 }
+
+func TestFindAll(t *testing.T) {
+	// Setup
+	e := echo.New()
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+
+	items := make([]domains.Item, 0)
+	t.Run("Success Case", func(t *testing.T) {
+		h, m := fixtures()
+		m.On("FindAll").Return(items, nil)
+		if assert.NoError(t, h.FindAll(c)) {
+			assert.JSONEq(t, "[]", rec.Body.String())
+		}
+	})
+
+	t.Run("Fail Case", func(t *testing.T) {
+		h, m := fixtures()
+		m.On("FindAll").Return(nil, errors.New("An Error"))
+		assert.Error(t, h.FindAll(c))
+	})
+}

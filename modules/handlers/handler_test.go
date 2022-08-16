@@ -23,6 +23,7 @@ func fixtures() (h *handlers.Handler, m *mocks.Repository) {
 }
 
 func TestFindOne(t *testing.T) {
+	// Setup
 	h, m := fixtures()
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
@@ -33,6 +34,7 @@ func TestFindOne(t *testing.T) {
 	id := 1
 	item := domains.Item{Title: "title1", ID: uint64(id)}
 
+	// Mock FindOne
 	m.On("FindOne", mock.Anything).Return(func(id uint64) interface{} {
 		if id == item.ID {
 			return item
@@ -45,7 +47,7 @@ func TestFindOne(t *testing.T) {
 		return errors.New("ID not found")
 	})
 
-	// Test
+	// Test cases
 	t.Run("Correct id provided", func(t *testing.T) {
 		responseJSON := `{"id":1,"title":"title1","checked":false,"created":"0001-01-01T00:00:00Z","updated":"0001-01-01T00:00:00Z"}`
 		c.SetParamValues(strconv.Itoa(id))
@@ -54,6 +56,7 @@ func TestFindOne(t *testing.T) {
 			assert.JSONEq(t, responseJSON, rec.Body.String())
 		}
 	})
+
 	t.Run("Not numeric id provided", func(t *testing.T) {
 		c.SetParamValues("x")
 		assert.Error(t, h.FindOne(c))

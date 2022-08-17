@@ -104,13 +104,13 @@ func (handler *Handler) Update(c echo.Context) error {
 		updateDto["Checked"] = body.Checked
 	}
 
-	affected, err := handler.repo.UpdateOne(uint64(id), updateDto)
+	updated, err := handler.repo.UpdateOne(uint64(id), updateDto)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, affected)
+	return c.JSON(http.StatusOK, updated)
 }
 
 func (handler *Handler) Delete(c echo.Context) error {

@@ -1,6 +1,7 @@
 package handlers_test
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -147,5 +148,48 @@ func TestCreate(t *testing.T) {
 			assert.NoError(t, h.Create(c))
 			assert.Equal(t, http.StatusConflict, rec.Code)
 		})
+	})
+}
+
+func TestUpdate(t *testing.T) {
+	// Setup
+	// h, m := fixtures()
+	e := echo.New()
+	e.Validator = &middlewares.CustomValidator{Validator: validator.New()}
+	t.Run("Success Case", func(t *testing.T) {
+
+		t.Run("Title only", func(t *testing.T) {})
+
+		t.Run("Checked only", func(t *testing.T) {})
+
+		t.Run("Both title and checked", func(t *testing.T) {
+			checked := false
+			updateDto := map[string]interface{}{
+				"Title":   "a mock title",
+				"Checked": &checked,
+			}
+			mockCreateJSON, _ := json.Marshal(updateDto)
+			req := httptest.NewRequest(http.MethodPatch, "/", strings.NewReader(string(mockCreateJSON)))
+			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+			rec := httptest.NewRecorder()
+			id := 1
+			c := e.NewContext(req, rec)
+			c.SetParamNames("id")
+			c.SetParamValues(strconv.Itoa(id))
+			h, m := fixtures()
+			m.On("UpdateOne", uint64(id), updateDto).Return(domains.Item{
+				Title:   updateDto["Title"].(string),
+				Checked: *updateDto["Checked"].(*bool),
+			}, nil)
+
+			assert.NoError(t, h.Update(c))
+			assert.Equal(t, http.StatusOK, rec.Code)
+			assert.Contains(t, rec.Body.String(), updateDto["Title"].(string))
+			assert.Contains(t, rec.Body.String(), strconv.FormatBool(*updateDto["Checked"].(*bool)))
+		})
+	})
+
+	t.Run("Fail Case", func(t *testing.T) {
+
 	})
 }

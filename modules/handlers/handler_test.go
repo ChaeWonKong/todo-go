@@ -5,11 +5,14 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"strconv"
+	"strings"
 	"testing"
 	mocks "todo-go/mocks/repositories"
 	"todo-go/modules/domains"
 	"todo-go/modules/handlers"
+	"todo-go/modules/middlewares"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -88,5 +91,61 @@ func TestFindAll(t *testing.T) {
 		h, m := fixtures()
 		m.On("FindAll").Return(nil, errors.New("An Error"))
 		assert.Error(t, h.FindAll(c))
+	})
+}
+
+func TestCreate(t *testing.T) {
+	mockCreateJSON := `{"title": "a mock title"}`
+	mockCreateFailJSON := `{}`
+	e := echo.New()
+	e.Validator = &middlewares.CustomValidator{Validator: validator.New()}
+
+	t.Run("Success case", func(t *testing.T) {
+		req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(mockCreateJSON))
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+		c := e.NewContext(req, rec)
+		h, m := fixtures()
+		// item := &domains.Item{}
+		m.On("CreateOne", mock.Anything).Return(int64(1), nil)
+		if assert.NoError(t, h.Create(c)) {
+			assert.Equal(t, http.StatusCreated, rec.Code)
+			assert.Contains(t, rec.Body.String(), "a mock title")
+		}
+	})
+
+	t.Run("Fail cases", func(t *testing.T) {
+		t.Run("Validation error", func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(mockCreateFailJSON))
+			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+			rec := httptest.NewRecorder()
+			c := e.NewContext(req, rec)
+			h, _ := fixtures()
+
+			assert.Error(t, h.Create(c))
+		})
+
+		t.Run("Repository error", func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(mockCreateJSON))
+			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+			rec := httptest.NewRecorder()
+			c := e.NewContext(req, rec)
+			h, m := fixtures()
+			m.On("CreateOne", mock.Anything).Return(int64(0), errors.New("An error"))
+
+			assert.Error(t, h.Create(c))
+		})
+
+		t.Run("Affected == 0", func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(mockCreateJSON))
+			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+			rec := httptest.NewRecorder()
+			c := e.NewContext(req, rec)
+			h, m := fixtures()
+			m.On("CreateOne", mock.Anything).Return(int64(0), nil)
+
+			assert.NoError(t, h.Create(c))
+			assert.Equal(t, http.StatusConflict, rec.Code)
+		})
 	})
 }
